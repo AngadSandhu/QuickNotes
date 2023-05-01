@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AngadSandhu/QuickNotes#readme",
   "dependencies": {
+    "chalk": "^2.1.0",
     "validator": "^13.9.0"
   }
 }

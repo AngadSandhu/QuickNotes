@@ -1,0 +1,8 @@
+// Challenges 
+// 1. Append a message to a Demo.txt file, using appendFileSync 
+// 2. Create a seprate file Utils.js, write a simple getNotes fn and import it in app js and use the given function
+
+
+
+const getNotes = require("./notesUtils");
+console.log(getNotes());

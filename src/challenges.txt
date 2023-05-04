@@ -1,7 +1,7 @@
 // Challenges 
 // 1. Append a message to a Demo.txt file, using appendFileSync 
 // 2. Create a seprate file Utils.js, write a simple getNotes fn and import it in app js and use the given function
-
+// 3. Use Chalk node module to print success and error text in different colors using validator node module isEmail function
 
 
 const getNotes = require("./notesUtils");

@@ -13,3 +13,5 @@ const redText = function(text) {
 
 console.log(getNotes());
 console.log(validator.isEmail("abc@abc")? blueText("Valid Email !!"): redText("WRONGO!"));
+
+console.log("PROCESS ARGV", process.argv);

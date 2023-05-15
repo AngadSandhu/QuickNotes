@@ -1,11 +1,9 @@
 const yargs = require("yargs");
 const chalk = require("chalk");
-const {getNotes, addNote} = require("./utils/notes.js");
+const {getNotes, addNote, removeNote} = require("./utils/notes.js");
 const { string } = require("yargs");
 
 const commandArg = process.argv[2];
-
-console.log(chalk.blue.bold(commandArg));
 
 // adding yargs custom commands
 // Read, Save, Remove Notes
@@ -26,7 +24,6 @@ yargs.command({
         }
     },
     handler: function(argv) {
-        console.log("Adding a note..",argv);
         addNote(argv.title, argv.content);
     }
 });
@@ -34,8 +31,14 @@ yargs.command({
 yargs.command({
     command: "remove",
     describe: "command for removing a note",
-    handler: function(){
-        console.log("Removing the note...");
+    builder: {
+        title: {
+            describe: "title of note to be removed",
+            demandOption: true
+        }
+    },
+    handler: function(argv){
+        removeNote(argv.title);
     }
 });
 
@@ -50,8 +53,9 @@ yargs.command({
 yargs.command({
     command: "read",
     describe: "command for reading notes",
-    handler: function(){
+    handler: function(argv){
         console.log("Reading the note");
+        removeNote(argv.title);
     }
 })
 

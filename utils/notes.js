@@ -59,6 +59,7 @@ const addNote = function(title,content) {
     } else {
         notes.push(newNote);
         saveNotes(notes); 
+        console.log(successText("Note Added Successfully !"));
     }
 }
 
@@ -69,8 +70,8 @@ const removeNote = function(title) {
         console.log(warningText("The note does not exists !"));
         return;
     } else {
-        console.log(successText("Note Deleted Successfully !"))
         saveNotes(newNotes);
+        console.log(successText("Note Deleted Successfully !"))
     }
 }
 

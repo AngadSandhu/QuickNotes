@@ -1,5 +1,6 @@
 const fs = require("fs");
 const chalk = require("chalk");
+const { info } = require("console");
 
 const warningText = function (text) {
     return chalk.red.bold(text)
@@ -9,8 +10,8 @@ const successText = function(text) {
     return chalk.blue.bold(text);
 }
 
-const getNotes = function(){
-    return "My notes for you ..";
+const infoText = function(text) {
+    return chalk.green.bold(text);
 }
 
 const loadNotes  = function() {
@@ -24,6 +25,25 @@ const loadNotes  = function() {
     }
 }
 
+const getNoteDetails = function(name){
+    const notes= loadNotes();
+    const noteDetails = notes.find((note)=>note.title===name);
+    if(noteDetails) {
+        console.log(infoText("Following are the note details :-"));
+        console.log(infoText("Title: "+ noteDetails.title+ ", Content: "+ noteDetails.content));
+    } else {
+        console.log(warningText("Note Details not found !"));
+    }
+}
+
+const listNotes = function() {
+    const notes= loadNotes();
+    console.log(chalk.green("Following is the list of notes"));
+    notes.forEach(note=>{
+        console.log(infoText(note.title))
+    })
+}
+
 const saveNotes = function(notes){
     let stringifiedNotes =  JSON.stringify(notes);
     fs.writeFileSync("./notes.json",stringifiedNotes);
@@ -32,9 +52,9 @@ const saveNotes = function(notes){
 const addNote = function(title,content) {
     let newNote = {title,content};
     let notes = loadNotes();
-    const checkDuplicates  = notes.filter(note=>note.title ===title);
-    if(checkDuplicates.length>0){
-        console.log("A note with the same title aleady exists, please add a new note with fresh contents & title");
+    const checkDuplicates  = notes.find(note=>note.title ===title);
+    if(checkDuplicates){
+        console.log(warningText("A note with the same title aleady exists, please add a new note with fresh contents & title"));
         return ;
     } else {
         notes.push(newNote);
@@ -56,4 +76,4 @@ const removeNote = function(title) {
 
 
 
-module.exports  = {getNotes, addNote, removeNote};
+module.exports  = { addNote, removeNote, getNoteDetails, listNotes};

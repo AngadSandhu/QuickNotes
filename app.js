@@ -1,6 +1,6 @@
 const yargs = require("yargs");
 const chalk = require("chalk");
-const {getNotes, addNote, removeNote} = require("./utils/notes.js");
+const {getNoteDetails,listNotes, addNote, removeNote} = require("./utils/notes.js");
 const { string } = require("yargs");
 
 const commandArg = process.argv[2];
@@ -43,19 +43,25 @@ yargs.command({
 });
 
 yargs.command({
-    command: "read",
-    describe: "command for reading a note",
+    command: "list",
+    describe: "command for listing all note",
     handler: function() {
-        console.log("Reading a note...");
+        listNotes();
     }
 })
 
 yargs.command({
     command: "read",
-    describe: "command for reading notes",
+    describe: "command for reading note details",
+    builder: {
+        title: {
+            describe: "read note for details",
+            type: string,
+            demandOption: true
+        }
+    },
     handler: function(argv){
-        console.log("Reading the note");
-        removeNote(argv.title);
+        getNoteDetails(argv.title);
     }
 })
 
